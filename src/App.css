@@ -30,19 +30,19 @@
   top: 20px;
   left: 3%;
   height: 44px;
-  width: 248px;
+  width: 268px;
   border-radius: 10px;
   background-color: #7676801f;
   border-width: 0ch;
   font-family: monospace;
-  font-size: 22px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 600;
   line-height: 26px;
   letter-spacing: 0em;
   text-align: center;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .chordDisplay1 {
@@ -76,4 +76,26 @@
   border-radius: 10px;
   scroll-behavior: smooth;
   left: 3em;
+  /* font-size: 20px; */
+}
+.two {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  overflow: auto;
+  padding: 5px;
+  background-color: white;
+  position: absolute;
+  font-family: monospace;
+  margin: 50px auto;
+  width: 336px;
+  height: 35em;
+  background: #ffffff;
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+  border-radius: 10px;
+  scroll-behavior: smooth;
+  left: 3em;
+  /* font-size: 20px; */
 }

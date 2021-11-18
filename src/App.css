@@ -45,7 +45,7 @@
   padding-right: 30px;
 }
 
-.chordDisplay1 {
+/* .oneChordDisplay {
   background-color: white;
   position: absolute;
   font-family: monospace;
@@ -57,11 +57,14 @@
   box-sizing: border-box;
   border-radius: 10px;
   left: 10%;
-}
-.multi {
+} */
+.multi,
+.two,
+.four,
+.enter {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   overflow: auto;
   padding: 5px;
   background-color: white;
@@ -76,26 +79,41 @@
   border-radius: 10px;
   scroll-behavior: smooth;
   left: 3em;
+  align-items: center;
   /* font-size: 20px; */
 }
-.two {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  overflow: auto;
-  padding: 5px;
-  background-color: white;
-  position: absolute;
-  font-family: monospace;
-  margin: 50px auto;
-  width: 336px;
-  height: 35em;
-  background: #ffffff;
-  border: 2px solid rgba(0, 0, 0, 0.6);
-  box-sizing: border-box;
+
+.no-btn {
+  width: 0px;
+  height: 0px;
+  font-size: 0px;
+  border: 0px;
+  padding: 0px;
+}
+.btn {
+  height: 40px;
+  width: 80px;
   border-radius: 10px;
-  scroll-behavior: smooth;
-  left: 3em;
-  /* font-size: 20px; */
+  border-width: 0px;
+  background-color: black;
+  color: white;
+  font-family: monospace;
+  font-size: 15px;
+  position: relative;
+  top: 448px;
+  cursor: pointer;
+}
+.btn:hover {
+  height: 40px;
+  width: 80px;
+  border-radius: 10px;
+  border-width: 0px;
+  background-color: #333;
+  color: white;
+  font-family: monospace;
+  font-size: 15px;
+  font-weight: bolder;
+  position: relative;
+  top: 448px;
+  cursor: pointer;
 }

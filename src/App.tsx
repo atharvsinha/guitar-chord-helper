@@ -4,6 +4,18 @@ import { useState } from "react";
 import GuitarChord from "react-guitar-chord";
 import search from "./img/search.svg";
 const notes = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
+const table = {
+  multi: { name: "multi", height: "10em" },
+  four: { name: "four", height: "15em" },
+  two: { name: "two", height: "16.5em" },
+  one: { name: "one", height: "30em" },
+};
+const nullTable = {
+  multi: { name: "multi", height: "0em" },
+  four: { name: "four", height: "0em" },
+  two: { name: "two", height: "0em" },
+  one: { name: "one", height: "0em" },
+};
 const notesMinor = [
   "Am",
   "A#m",
@@ -22,18 +34,19 @@ const capitalise = (input: any) => {
   if (String(input).length === 0) return "";
   else if (input.length === 1) return input.toUpperCase();
   else if (input.length > 1) return input[0].toUpperCase() + input.slice(1);
-  else return null;
 };
 function App() {
+  const [tableData, setTable] = useState(table);
+  const [buttonStatus, setButtonStatus] = useState("no-btn");
   const chordDisplay = (input: any) => {
     if (input === "") {
       return (
-        <div className="multi">
+        <div className={tableData.multi.name}>
           {notes.map((i) => {
             return (
               <GuitarChords
                 chord={i}
-                height="10em"
+                height={tableData.multi.height}
                 quality="MAJ"
                 alternate={false}
               />
@@ -43,7 +56,7 @@ function App() {
             return (
               <GuitarChords
                 chord={i}
-                height="10em"
+                height={tableData.multi.height}
                 quality="MIN"
                 alternate={false}
               />
@@ -53,7 +66,7 @@ function App() {
             return (
               <GuitarChords
                 chord={i}
-                height="10em"
+                height={tableData.multi.height}
                 alternate={true}
                 quality="MAJ"
               />
@@ -63,7 +76,7 @@ function App() {
             return (
               <GuitarChords
                 chord={i}
-                height="10em"
+                height={tableData.multi.height}
                 quality="MIN"
                 alternate={true}
               />
@@ -73,28 +86,28 @@ function App() {
       );
     } else if (notes.includes(input)) {
       return (
-        <div className="multi">
+        <div className={tableData.four.name}>
           <GuitarChords
             chord={input}
-            height="15em"
+            height={tableData.four.height}
             quality="MAJ"
             alternate={false}
           />
           <GuitarChords
             chord={input}
-            height="15em"
+            height={tableData.four.height}
             quality="MIN"
             alternate={false}
           />
           <GuitarChords
             chord={input}
-            height="15em"
+            height={tableData.four.height}
             quality="MAJ"
             alternate={true}
           />
           <GuitarChords
             chord={input}
-            height="15em"
+            height={tableData.four.height}
             quality="MIN"
             alternate={true}
           />
@@ -102,16 +115,16 @@ function App() {
       );
     } else if (notesMinor.includes(input)) {
       return (
-        <div className="two">
+        <div className={tableData.two.name}>
           <GuitarChords
             chord={input.slice(0, input.length - 1)}
-            height="16.5em"
+            height={tableData.two.height}
             quality="MIN"
             alternate={false}
           />
           <GuitarChords
             chord={input.slice(0, input.length - 1)}
-            height="16.5em"
+            height={tableData.two.height}
             quality="MIN"
             alternate={true}
           />
@@ -125,17 +138,51 @@ function App() {
     alternate: any;
     quality: any;
   }
-
-  const GuitarChords = ({ chord, height, alternate, quality }: guitarChord) => {
-    const [states, setStates] = useState(true);
+  const initialLarge = {
+    height: "0em",
+    className: "null",
+    chord: "",
+    alternate: false,
+    quality: "",
+  };
+  const [large, setLarge] = useState(initialLarge);
+  const LargeChord = () => {
     return (
-      <GuitarChord
-        chord={chord}
-        height={height}
-        quality={quality}
-        alternate={alternate}
-        style={{ cursor: "pointer" }}
-      />
+      <div className={large.className}>
+        <GuitarChord
+          chord={large.chord}
+          quality={large.quality}
+          height={large.height}
+          alternate={large.alternate}
+        />
+      </div>
+    );
+  };
+  const GuitarChords = ({ chord, height, alternate, quality }: guitarChord) => {
+    return (
+      <div
+        className={chord}
+        id="chordShape"
+        onClick={() => {
+          setTable(nullTable);
+          setLarge({
+            height: "30em",
+            className: "enter",
+            chord: chord,
+            alternate: alternate,
+            quality: quality,
+          });
+          setButtonStatus("btn");
+        }}
+      >
+        <GuitarChord
+          chord={chord}
+          height={height}
+          quality={quality}
+          alternate={alternate}
+          style={{ cursor: "pointer" }}
+        />
+      </div>
     );
   };
   const [input, setInput] = useState("");
@@ -153,6 +200,20 @@ function App() {
       />
       <img className="searchIcon" alt="searchIcon" src={search} />
       {chordDisplay(input)}
+      <LargeChord />
+      <button
+        className={buttonStatus}
+        onClick={() => {
+          {
+            setTable(table);
+            setLarge(initialLarge);
+            setButtonStatus("no-btn");
+            console.log("out");
+          }
+        }}
+      >
+        Back
+      </button>
     </div>
   );
 }
